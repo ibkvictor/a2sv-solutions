@@ -1,0 +1,112 @@
+# class Solution:
+#     def threeSum(self, array: List[int]) -> List[List[int]]:
+#         array = sorted(array)
+#         res = set()
+#         for i in range(len(array) - 2):
+#                 complement = 0 - array[i]
+#                 j = i + 1
+#                 k = len(array) - 1
+#                 while j < k:
+#                         if array[j] + array[k] > complement:
+#                                 k -= 1
+#                         elif array[j] + array[k] == complement:
+#                                 res.add((array[i],array[j], array[k]))
+#                                 j += 1
+#                                 k -= 1
+#                         else:
+#                                 j += 1
+#         return list(res)
+
+class Solution:
+    def threeSum(self, nums: list[int]) -> list[list[int]]:
+        nums_val_idx = []
+        for idx, val in enumerate(nums):
+            nums_val_idx.append([val, idx])
+        nums_val_idx.sort(key= lambda x: x[0])
+        
+        #-4 -1 -1 0 1 2
+        result = set()
+        # normal two-sum
+        # solution = None
+        for tar_idx in range(len(nums_val_idx)):
+            i = tar_idx + 1
+            j = len(nums) - 1
+
+            while i < j:
+                # if tar_idx == nums_val_idx[i][1]:
+                #     i += 1
+                #     continue
+
+                # if tar_idx == nums_val_idx[j][1]:
+                #     j -= 1
+                #     continue
+                
+                if nums_val_idx[i][0] + nums_val_idx[j][0] == -nums_val_idx[tar_idx][0]:
+                    result.add((nums_val_idx[i][0], nums_val_idx[j][0], nums_val_idx[tar_idx][0]))
+                    i += 1
+                    j -= 1
+
+                elif nums_val_idx[i][0] + nums_val_idx[j][0] < -nums_val_idx[tar_idx][0]:
+                    # i want a bigger value
+                    i += 1
+
+                else:
+                    # i want a smaller value
+                    j -= 1
+
+
+        return list(result)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#         # idxes = dict()
+#         # nums.sort() # O(n log n)
+#         # for idx, val in enumerate(nums): # O(n)
+#         #     idxes[val] = idx
+
+#         #     # 3000 (10^3)
+
+#         # result = dict()
+
+#         # for i in range(len(nums) - 1): # O(n ^ 2)
+#         #     for j in range(i + 1, len(nums)):
+#         #         val = -(nums[i] + nums[j])
+#         #         if val in idxes:
+#         #             k = idxes[val]
+
+#         #             if k != i and k != j: # O(6)
+#         #                 if nums[i] <= nums[j] <= nums[k]:
+#         #                     result[f"{nums[i]}_{nums[j]}_{nums[k]}"] = [nums[i], nums[j], nums[k]]
+
+#         #                 elif nums[i] <= nums[k] <= nums[j]:
+#         #                     result[f"{nums[i]}_{nums[k]}_{nums[j]}"] = [nums[i], nums[k], nums[j]]
+
+#         #                 elif nums[j] <= nums[i] <= nums[k]:
+#         #                     result[f"{nums[j]}_{nums[i]}_{nums[k]}"] = [nums[j], nums[i], nums[k]]
+                        
+#         #                 elif nums[j] <= nums[k] <= nums[i]:
+#         #                     result[f"{nums[j]}_{nums[k]}_{nums[i]}"] = [nums[j], nums[k], nums[i]]
+
+#         #                 elif nums[k] <= nums[j] <= nums[i]:
+#         #                     result[f"{nums[k]}_{nums[j]}_{nums[i]}"] = [nums[k], nums[j], nums[i]]
+
+#         #                 elif nums[k] <= nums[i] <= nums[j]:
+#         #                     result[f"{nums[k]}_{nums[i]}_{nums[j]}"] = [nums[k], nums[i], nums[j]]
+
+#         # return list(result.values())
