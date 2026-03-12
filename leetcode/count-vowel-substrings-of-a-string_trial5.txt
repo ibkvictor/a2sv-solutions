@@ -1,0 +1,33 @@
+class Solution:
+    def countVowelSubstrings(self, word: str) -> int:
+        i = 0
+        j = 0
+        vowels = {"a", "e", "i", "o", "u"}
+        # while j < len(word):
+        #     if word[i : j] not in 
+
+        # i = 0
+        # j = 0
+        # count = 0
+        # while j < len(word):
+        #     print(word[i: j + 1])
+        #     if not (Counter(word[i: j + 1]).keys() - vowels):
+        #         if Counter(word[i: j + 1]).keys() == vowels:
+        #             count += 1
+
+        #         j += 1
+
+        #     else:
+        #         i += 1
+        #         j = i
+        #         # j += 5
+
+        # a b c d e
+        count = 0
+        for i in range(len(word)):
+            for j in range(i + 1, len(word) + 1):
+                print(i, j)
+                if Counter(word[i:j]).keys() == vowels:
+                    count += 1
+
+        return count
