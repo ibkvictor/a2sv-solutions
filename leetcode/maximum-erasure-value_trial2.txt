@@ -1,0 +1,27 @@
+from collections import defaultdict
+import math
+class Solution:
+    def maximumUniqueSubarray(self, nums: List[int]) -> int:
+        count = defaultdict(int)
+        seen_nums = 0
+        i = 0
+        run_sum = 0
+        max_sum = -math.inf
+        for j in range(len(nums)):
+            count[nums[j]] += 1
+            seen_nums += 1
+            run_sum += nums[j]
+
+            while i < j and seen_nums != len(count):
+                # print(i, j)
+                run_sum -= nums[i]
+                count[nums[i]] -= 1
+                if not count[nums[i]]:
+                    del count[nums[i]]
+                seen_nums -= 1
+                i += 1
+            
+            max_sum = max(run_sum, max_sum) 
+            j += 1
+
+        return max_sum
