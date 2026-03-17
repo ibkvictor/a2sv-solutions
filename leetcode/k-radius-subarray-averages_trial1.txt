@@ -1,0 +1,17 @@
+class Solution:
+    def getAverages(self, nums: List[int], k: int) -> List[int]:
+        avgs = []
+        i = 0
+        summy = 0
+        for j in range(len(nums)):
+            summy += nums[j]
+            while i < j and j - i + 1 > (k * 2 + 1):
+                summy -= nums[i]
+                i += 1
+
+            if j - i + 1 == (k * 2 + 1):
+                avgs.append(summy // (k * 2 + 1))
+
+            else:
+                avgs.append(-1)
+        return avgs[k:] + avgs[:k]
