@@ -1,0 +1,21 @@
+class Solution:
+    def minOperations(self, nums: List[int]) -> int:
+        n = len(nums)
+
+        # nums.sort()
+        set_nums = list(set(nums))
+        set_nums.sort()
+        s = len(set_nums)
+        max_count = 0
+        # run_diff = 0
+        i = 0
+        # print(nums)
+        # print(set_nums)
+        for j in range(s):
+            while (set_nums[j] - set_nums[i]) > n - 1 and i < j:
+                i += 1
+
+            max_count = max(j - i + 1, max_count)
+            # print(i, j)
+
+        return (len(nums) - max_count)
