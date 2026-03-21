@@ -1,0 +1,20 @@
+class Solution:
+    def longestSemiRepetitiveSubstring(self, s: str) -> int:
+        max_length = 1
+        last_rep = None
+        i = 0
+        count_dup = 0
+        for j in range(1, len(s)):
+            if s[j-1] == s[j]:
+                count_dup += 1
+
+            while i < j and count_dup > 1:
+                i = last_rep
+                count_dup -= 1
+
+            if s[j-1] == s[j]:
+                last_rep = j
+
+            max_length = max(j - i + 1, max_length)
+
+        return max_length
